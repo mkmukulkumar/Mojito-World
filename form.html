@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mojito World</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <style>
+            .register .nav-tabs .nav-link:hover{
+                border: none;
+            }     
+            .container{
+                display: flex;
+                background: -webkit-linear-gradient(top, #055a4f, #000000);
+                height: 100vh;
+                justify-content: center;
+            }
+            .container h1{
+                color: #fff;
+                margin:30px
+            }
+            .btnSubmit
+            {
+                padding: 10px;
+                border-radius: 15px;
+                color: #fff;
+                background-color: #03612e;
+                border: none;
+                cursor: pointer;
+                color: rgb(246, 246, 252);
+            }
+    </style>
+
+</head>
+<body>
+    
+    <div class="container">
+        <div class="register">
+            <h1>Mojito World</h1>
+            <form method="post" autocomplete="off" name="google-sheet">
+                <div class="form-group">
+                    <input type="text" name="Name" class="form-control" placeholder="Your Name *" value="" required=""/>
+                </div>
+                <div class="form-group">
+                    <input type="text" name="Email" class="form-control" placeholder="Your Email *" value="" required=""/>
+                </div>
+                <div class="form-group">
+                    <input type="number" name="Phone" class="form-control" placeholder="Your Contact Number *" value="" required=""/>
+                </div>
+                <div class="form-group">
+                    <input type="text" name="Message" class="form-control" placeholder="Message *" value="" required=""/>
+                </div>
+                <div class="form-group">
+                    <input type="submit" name="submit" class="btnSubmit btn-block" value="Submit" />
+                </div>
+            </form>  
+        </div>          
+    </div>
+          
+    <script>
+        const scriptURL = "https://script.google.com/macros/s/AKfycbxF4a3QlKz5rfudSIUtrgji-KZ9a_5aoX4_2gTS9iW72z8uXl-p6mmhArHCTpXCdGgO/exec"
+        const form = document.forms['google-sheet']
+        
+        form.addEventListener('submit', e => {
+            e.preventDefault()
+            fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+            .then( form.reset(),
+                // response => alert("Submitted")
+                )
+           
+            .catch(error => console.error('Error!', error.message))
+        })     
+        
+    </script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</body>
+</html>
